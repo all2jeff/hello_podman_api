@@ -31,8 +31,41 @@ crates_repository(
     cargo_lockfile = "//:Cargo.lock",
     lockfile = "//:Cargo.bazel.lock",
     packages = {
-        "podman-api": crate.spec(version = "0.10.0"),
+        "base64": crate.spec(version = "0.13.1"),
+        "byteorder": crate.spec(version = "1.4.3"),
+        "bytes": crate.spec(version = "1.4.0"),
+        "chrono": crate.spec(version = "0.4.24"),
+        # "containers-api": crate.spec(version = "0.8.0"),
+        "containers-api": crate.spec(
+            git = "https://github.com/vv9k/containers-api.git",
+            branch = "master",
+        ),
+        "flate2": crate.spec(version = "1.0.26"),
+        "futures-util": crate.spec(version = "0.3.28"),
+        "futures_codec": crate.spec(version = "0.4.1"),
+        "log": crate.spec(version = "0.4.17"),
+        "paste": crate.spec(version = "1.0.12"),
+        "podman-api-stubs": crate.spec(version = "0.9.0"),
+        "serde": crate.spec(version = "1.0.160", features = ["derive"]),
+        "serde_json": crate.spec(version = "1.0.96"),
+        "tar": crate.spec(version = "0.4.38"),
+        "thiserror": crate.spec(version = "1.0.40"),
+        "tokio": crate.spec(version = "1.28.0"),
+        "url": crate.spec(version = "2.3.1"),
     },
+)
+
+http_archive(
+    name = "crate_podman_api",
+    build_file = "//third_party/crate_podman_api:BUILD.podman_api.bazel",
+    # sha256 = "146b6b46b9babcb9bb8dcf9e3614d7f9b649b7d37315d568e90c312c88792f30",
+    # strip_prefix = "podman-api-rs-0.10.0",
+    # urls = ['https://github.com/vv9k/podman-api-rs/archive/refs/tags/0.10.0.zip']
+    sha256 = "62e28c9db1d9b4e18bff9c2784205759095effd53ecc9d503e73f975ecc679c7",
+    strip_prefix = "podman-api-rs-f35e6f9f9fdb9d9023aed341252c16c0ad9796d1",
+    urls = ["https://github.com/vv9k/podman-api-rs/archive/f35e6f9f9fdb9d9023aed341252c16c0ad9796d1.zip"],
+
+
 )
 
 load("@crate_index//:defs.bzl", "crate_repositories")

@@ -3,9 +3,9 @@ load("@rules_rust//rust:defs.bzl", "rust_binary")
 
 rust_binary(
     name = "hello_podman_api",
-    srcs = ["src/main.rs"],
+    srcs = ["main.rs"],
     visibility = ["//visibility:public"],
     deps = [
-        "@crate_index//:podman-api",
+        "@crate_podman_api//:podman_api",
     ]
 )

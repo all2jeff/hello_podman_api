@@ -1,0 +1,56 @@
+load("@rules_rust//rust:defs.bzl", "rust_library")
+
+load("@rules_rust//crate_universe/private:selects.bzl", "selects")
+
+package(default_visibility = ["//visibility:public"])
+
+rust_library(
+    name = "podman_api",
+    deps = [
+        "@crate_index//:base64",
+        "@crate_index//:byteorder",
+        "@crate_index//:bytes",
+        "@crate_index//:chrono",
+        "@crate_index//:containers-api",
+        "@crate_index//:flate2",
+        "@crate_index//:futures-util",
+        "@crate_index//:futures_codec",
+        "@crate_index//:log",
+        "@crate_index//:podman-api-stubs",
+        "@crate_index//:serde",
+        "@crate_index//:serde_json",
+        "@crate_index//:tar",
+        "@crate_index//:thiserror",
+        "@crate_index//:tokio",
+        "@crate_index//:url",
+    ],
+    proc_macro_deps = [
+        "@crate_index//:paste",
+    ],
+    compile_data = glob(
+        include = ["**"],
+        exclude = [
+            "**/* *",
+            "BUILD",
+            "BUILD.bazel",
+            "WORKSPACE",
+            "WORKSPACE.bazel",
+        ],
+    ),
+    crate_features = [
+        "chrono",
+        "default",
+    ],
+    crate_root = "src/lib.rs",
+    edition = "2021",
+    rustc_flags = ["--cap-lints=allow"],
+    srcs = glob(["**/*.rs"]),
+    tags = [
+        "cargo-bazel",
+        "crate-name=podman-api",
+        "manual",
+        "noclippy",
+        "norustfmt",
+    ],
+    version = "0.10.0",
+)
